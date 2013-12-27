@@ -1,35 +1,63 @@
 /*
  * GET home page.
  */
+function isArray(object) {
+  return object != null && typeof object === "object" &&
+    'splice' in object && 'join' in object;
+}
 
-exports.index = function(req, res){
-  var input = parseInt(req.query.number);
+function decompose(number)
+{
+  var input = parseInt(number);
   var body = {
-    "number" : req.query.number
+    "number" : number
   };
 
-  if(isNaN(input) == false)
+  if(input > 1000000)
   {
-    var decomp = [];
-    var div = input;
-    while(div > 1)
+    body.error = "too big number (>1e6)";
+    return body;
+  }
+  
+  if(isNaN(input))
+  {
+    body.error = "not a number";
+    return body;
+  }
+    
+  var decomp = [];
+  var div = input;
+  while(div > 1)
+  {
+    for(i = 2; i <= div; i++)
     {
-      for(i = 2; i <= div; i++)
+      if(div % i == 0)
       {
-        if(div % i == 0)
-        {
-          div = div / i;
-          decomp.push(i);
-          break;
-        }
+        div = div / i;
+        decomp
+        .push(i);
+        break;
       }
     }
-    body.decomposition = decomp;
+  }
+  body.decomposition = decomp;
+    
+  return body;
+}
+
+exports.index = function(req, res){
+  if(isArray(req.query.number))
+  {
+    var body = [];
+    req.query.number.forEach(function(number){
+      body.push(decompose(number));
+    });
   }
   else
   {
-    body.error = "not a number";
+    body = decompose(req.query.number);
   }
+  
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(body));
 };
