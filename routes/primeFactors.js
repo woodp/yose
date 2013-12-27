@@ -14,8 +14,15 @@ exports.index = function(req, res){
     var div = input;
     while(div > 1)
     {
-      div = div / 2;
-      decomp.push(2);
+      for(i = 2; i <= div; i++)
+      {
+        if(div % i == 0)
+        {
+          div = div / i;
+          decomp.push(i);
+          break;
+        }
+      }
     }
     body.decomposition = decomp;
   }
