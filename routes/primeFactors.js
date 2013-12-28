@@ -61,3 +61,7 @@ exports.index = function(req, res){
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(body));
 };
+
+exports.ui = function(req, res){
+  res.render('ui', { title: 'ui - yose level 2.6' });
+}

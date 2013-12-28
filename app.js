@@ -33,6 +33,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/primeFactors', primeFactors.index);
+app.get('/primeFactors/ui', primeFactors.ui);
 app.get('/ping', ping.index);
 
 http.createServer(app).listen(app.get('port'), function(){
