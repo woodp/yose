@@ -1,4 +1,4 @@
 yose
 ====
 
-repo for playing [yose the game](http://yosethegame.com/ while learning node.js)
+repo for playing [YoseTheGame](http://yosethegame.com/ while learning node.js)
