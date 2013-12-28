@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  
+  script(src="http://code.jquery.com/jquery-2.0.3.min.js")
+  script(src="/javascripts/index.js")
+
+  h1#title #{title}
+  p#invitation Input a number to be decomposed in it's prime factors
+  form(action="/primeFactors", method="get")
+    fieldset
+      div
+        label(for="number") number
+      div
+        input(type="text",name="number")#number
+      div
+        button(type="submit")#go Go
+    
+    div
+      p result: 
+        span#result
