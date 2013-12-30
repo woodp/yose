@@ -24,7 +24,13 @@ function decompose(number)
     body.error = "too big number (>1e6)";
     return body;
   }
-      
+  
+  if(input <= 1)
+  {
+    body.error = input + " is not an integer > 1";
+    return body;
+  }
+  
   var decomp = [];
   var div = input;
   while(div > 1)
