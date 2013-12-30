@@ -8,23 +8,23 @@ function isArray(object) {
 
 function decompose(number)
 {
-  var input = parseInt(number);
   var body = {
     "number" : number
   };
 
+  if(isNaN(number))
+  {
+    body.error = "not a number";
+    return body;
+  }
+
+  var input = parseInt(number);
   if(input > 1000000)
   {
     body.error = "too big number (>1e6)";
     return body;
   }
-  
-  if(isNaN(input))
-  {
-    body.error = "not a number";
-    return body;
-  }
-    
+      
   var decomp = [];
   var div = input;
   while(div > 1)
