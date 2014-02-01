@@ -6,3 +6,21 @@ body {
 a {
   color: #00B7FF;
 }
+
+td
+{
+  border: 1px black solid;
+  padding: 5px 10px;
+  height: 15px;
+  width: 15px;
+}
+
+.lost
+{
+  background-color: red;
+}
+
+.safe
+{
+  background-color: green;
+}
