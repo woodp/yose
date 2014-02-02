@@ -1,4 +1,7 @@
 $(function(){
+  
+  document.grid = getRandomGrid();
+  
   $("td").click(function(){
     var id = $(this).prop('id');
     var row = parseInt(id.substr(5,1));
@@ -35,12 +38,19 @@ $(function(){
 			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
 		];
   });
+  $("#sample3").click(function (){
+    document.grid = [
+        ['bomb' , 'empty', 'empty'],
+        ['empty', 'empty', 'empty'],
+        ['empty', 'empty', 'bomb' ]
+      ];
+  });
 });
 
 function clearAdjacentEmptyCells(row, col){
-  if(row < 1 || row > 8)
+  if(row < 1 || row > document.grid.length)
       return;
-  if(col < 1 || col > 8)
+  if(col < 1 || col > document.grid[0].length)
       return;
   
   var cellid = "#cell-" + row + "x" + col;
@@ -92,14 +102,47 @@ function countNearBombs(row, col){
 }
 
 function hasBomb(row, col){
-  if(row < 1 || row > 8)
+  if(row < 1 || row > document.grid.length)
     return false;
-  if(col < 1 || col > 8)
+  if(col < 1 || col > document.grid[0].length)
     return false;
   
   return document.grid[row-1][col-1] == 'bomb';
 }
-  
+
+function getRandomGrid()
+{
+  var grid = [
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+		];;
+  for(var i=0; i < grid.length; i++)
+  {
+    for(var j=0; j < grid[0].length; j++)
+    {
+      grid[i][j] = getRandomBomb();
+    }
+  }
+  return grid;
+}
+
+function getRandomBomb()
+{
+  var rand = Math.random();
+  if(rand > 0.7) // 30% of the grid with bombs
+    return 'bomb';
+  else
+    return 'empty';
+
+}
+
+
 function load()
 {
   
